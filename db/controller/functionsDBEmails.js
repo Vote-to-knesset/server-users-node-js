@@ -1,7 +1,7 @@
 import Emails from "../modules/emailUse";
 
 
-export async function addToDB(objectEmail) {
+export async function addOneEmail(objectEmail) {
     // creat a object to add to do DB.
     const addEmail = new Emails(objectEmail);
   
@@ -16,7 +16,7 @@ export async function addToDB(objectEmail) {
   
   export async function allDBEamil() {
     try {
-      const allEmails = await Email.find({});
+      const allEmails = await Emails.find({});
       console.log(allEmails);
       return allEmails;
     } catch (error) {
@@ -27,7 +27,7 @@ export async function addToDB(objectEmail) {
   
   export async function getOneEmail(objectEmail) {
     try {
-      return await Email.findOne(objectEmail);
+      return await Emails.findOne(objectEmail);
     } catch (error) {
       return undefined;
     }
