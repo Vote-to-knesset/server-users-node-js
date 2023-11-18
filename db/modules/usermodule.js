@@ -29,10 +29,10 @@ const userSchema = new mongoose.Schema({
     require: true,
   },
   billsVote: {
-    type: []
-  }
+    type: Array,
+    default: [],
+  },
 });
-
 
 const User = mongoose.model("User", userSchema);
 export default User;
