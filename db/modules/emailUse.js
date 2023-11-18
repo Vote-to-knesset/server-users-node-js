@@ -6,6 +6,20 @@ const emailSchema = new mongoose.Schema({
     require: true,
     unique: true,
   },
+  verifyEmail: {
+    value: {
+      type: String,
+      default: "",
+    },
+    date: {
+      type: String,
+      default: new Date(),
+    },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+  },
 });
 
 const Emails = mongoose.model("Emails", emailSchema);
