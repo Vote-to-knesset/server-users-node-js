@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   userName: {
-    type: string,
+    type: String,
     require: true,
     unique: true,
   },
@@ -17,15 +17,15 @@ const userSchema = new mongoose.Schema({
     default: new Date(),
   },
   party: {
-    type: string,
+    type: String,
     require: true,
   },
   identity: {
-    type: string,
+    type: String,
     require: true,
   },
   gender: {
-    type: string,
+    type: String,
     require: true,
   },
   billsVote: {

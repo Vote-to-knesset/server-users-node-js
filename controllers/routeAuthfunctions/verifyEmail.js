@@ -1,6 +1,6 @@
-import { getOneEmail } from "../../db/controller/functionsDBEmails";
-import calculateDateDifference from "../../functions/calculateDateDifference";
-import { addOneUser } from "../../db/controller/functionsDBUser";
+import { getOneEmail } from "../../db/controller/functionsDBEmails.js";
+import calculateDateDifference from "../../functions/calculateDateDifference.js";
+import { addOneUser } from "../../db/controller/functionsDBUser.js";
 
 const verifyEmailFunction = async (req, res) => {
   const { emailCode, email, userName, password, party, identity, gender } =

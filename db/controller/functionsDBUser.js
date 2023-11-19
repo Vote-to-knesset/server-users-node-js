@@ -1,4 +1,4 @@
-import User from "../modules/usermodule";
+import User from "../modules/usermodule.js";
 
 
 export async function addOneUser(objectUser) {

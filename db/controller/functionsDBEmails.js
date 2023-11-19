@@ -1,4 +1,4 @@
-import Emails from "../modules/emailUse";
+import Emails from "../modules/emailUse.js";
 
 export async function addOneEmail(objectEmail) {
   // creat a object to add to do DB.

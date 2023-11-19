@@ -1,4 +1,4 @@
-import { getOneUser } from "../../db/controller/functionsDBUser";
+import { getOneUser } from "../../db/controller/functionsDBUser.js";
 import bcrypt from "bcrypt";
 import JWT from "jsonwebtoken";
 

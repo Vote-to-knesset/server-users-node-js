@@ -2,12 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import connectDB from './db/dbconnect.js'
-
-
-
+import connectDB from "./db/dbconnect.js";
 
 dotenv.config();
+
+// routers
+import routerAuth from "./routes/routerAuth.js";
 
 const port = process.env.PORT || 5050;
 
@@ -16,10 +16,10 @@ app.use(express.json());
 
 app.use(cors());
 
-
 // connect to the DB
 connectDB();
 
+app.use("/users", routerAuth);
 
 // chack if the DB is connect.
 mongoose.connection.once("open", () => {
