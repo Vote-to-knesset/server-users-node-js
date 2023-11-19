@@ -2,9 +2,9 @@ import {
   addOneEmail,
   getOneEmail,
   updeteOneEmail,
-} from "../../db/controller/functionsDBEmails";
-import sendEmail from "../../functions/sendEmail/sendEmail";
-import rundomCode from "../../functions/rundomCode";
+} from "../../db/controller/functionsDBEmails.js";
+import sendEmail from "../../functions/sendEmail/sendEmail.js";
+import rundomCode from "../../functions/rundomCode.js";
 
 const signupFunction = async (req, res) => {
   const { email } = req.body;
@@ -27,7 +27,7 @@ const signupFunction = async (req, res) => {
       msg: "erorr to send email",
     });
   }
-  if (emailUsed.verifyEmail.verify == false) {
+  if (emailUsed && emailUsed.verifyEmail.verify == false) {
     const updateUser = await updeteOneEmail(email, {
       "verifyEmail.value": rundomCodeForEmail,
       "verifyEmail.date": new Date(),
