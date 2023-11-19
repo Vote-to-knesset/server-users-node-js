@@ -1,4 +1,4 @@
-import { getOneUser } from "../../db/controller/functionsDBUser"; 
+import { getOneUser } from "../../db/controller/functionsDBUser.js"; 
 
 const userNameFunction = async (req, res) => {
   // get the userName.
