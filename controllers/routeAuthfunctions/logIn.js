@@ -4,7 +4,7 @@ import JWT from "jsonwebtoken";
 
 const loginFunction = async (req, res) => {
   // get the user name and the password.
-  const { userName, password } = req.body.sendData;
+  const { userName, password } = req.body;
   // check if the user is in the DB.
   let user = await getOneUser({ userName: userName });
   // if it's empty it's send a erorr.
