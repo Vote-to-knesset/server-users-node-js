@@ -1,11 +1,11 @@
 import { getOneEmail } from "../../db/controller/functionsDBEmails.js";
 import calculateDateDifference from "../../functions/calculateDateDifference.js";
 import { addOneUser } from "../../db/controller/functionsDBUser.js";
-
+import bcrypt from 'bcrypt'
 const signupUserFunction = async (req, res) => {
   const { emailCode, email, userName, password, party, identity, gender } =
     req.body;
-
+    console.log(req.body);
   if (
     !emailCode ||
     !email ||
@@ -23,12 +23,13 @@ const signupUserFunction = async (req, res) => {
     email: email,
     "verifyEmail.value": emailCode,
   });
+  console.log(emailUser);
   if (!emailUser) {
     return res.status(401).json({
-      msg: "one of the informtion is wong",
+      msg: "one of the informtion is wrong",
     });
   }
-  const time = calculateDateDifference(verifyEmail.date, new Date());
+  const time = calculateDateDifference(emailUser.verifyEmail.date, new Date());
   if (time.hours > 0 || time.minutes > 10) {
     return res.status(401).json({
       msg: "time is over",
