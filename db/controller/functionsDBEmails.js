@@ -26,6 +26,7 @@ export async function allDBEamil() {
 
 export async function getOneEmail(objectEmail) {
   try {
+    console.log(objectEmail);
     return await Emails.findOne(objectEmail);
   } catch (error) {
     return undefined;
@@ -33,7 +34,7 @@ export async function getOneEmail(objectEmail) {
 }
 export async function updeteOneEmail(email, objectUpdate) {
   try {
-    const resDB = await User.updateOne(
+    const resDB = await Emails.updateOne(
       { email: email },
       { $set: objectUpdate }
     );
