@@ -5,7 +5,7 @@ const userNameFunction = async (req, res) => {
   const userName = req.body.Name;
   // check if the username is in the DB.
   try {
-    let user = await getOneUser({ username: userName });
+    let user = await getOneUser({ userName: userName });
     if (!user) {
       return res.status(200).json({ msg: "Not exist" });
     } else {

@@ -8,7 +8,8 @@ const loginFunction = async (req, res) => {
   // check if the user is in the DB.
   let user = await getOneUser({ userName: userName });
   // if it's empty it's send a erorr.
-  if (!userName) {
+  console.log(userName);
+  if (!user) {
     return res.status(400).json({
       errors: {
         msg: "Invalid Credentials",
@@ -16,8 +17,9 @@ const loginFunction = async (req, res) => {
     });
   }
   // check if the password is corecct.
-  let corectPassword = await bcrypt.compare(password, user.password);
+  let corectPassword = await bcrypt.compare(  password,user.password);
   // if it's not a corect password it's send a eroor.
+  console.log(corectPassword);
   if (!corectPassword) {
     return res.status(400).json({
       errors: {
