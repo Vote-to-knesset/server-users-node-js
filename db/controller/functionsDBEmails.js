@@ -33,7 +33,7 @@ export async function getOneEmail(objectEmail) {
 }
 export async function updeteOneEmail(email, objectUpdate) {
   try {
-    const resDB = await User.updateOne(
+    const resDB = await Emails.updateOne(
       { email: email },
       { $set: objectUpdate }
     );

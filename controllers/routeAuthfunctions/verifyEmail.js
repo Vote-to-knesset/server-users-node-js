@@ -11,7 +11,7 @@ const verifyEmailFunction = async (req, res) => {
       msg: "one of the informtion is wong",
     });
   }
-  const updateEmail = updeteOneEmail(email, { "verifyEmail.verify": true });
+  const updateEmail = await updeteOneEmail(email, { "verifyEmail.verify": true });
   if (updateEmail == true) {
     return res.status(200).json({
       msg: "the email is verify",
