@@ -6,6 +6,8 @@ import verifyEmailFunction from '../controllers/routeAuthfunctions/verifyEmail.j
 import loginFunction from '../controllers/routeAuthfunctions/logIn.js'
 import signupUserFunction from '../controllers/routeAuthfunctions/signupUser.js'
 import userNameFunction from '../controllers/routeAuthfunctions/userUsed.js'
+import { verifyToken, submitVoteFunction ,verifyUser } from '../controllers/routeAuthfunctions/submitVote.js'
+import getSelctedBills from '../controllers/routeAuthfunctions/getBillsInfo.js'
 
 const router = express.Router()
 
@@ -15,5 +17,9 @@ router.post("/verifyEmail",verifyEmailFunction)
 router.post("/login", loginFunction)
 router.post("/signupUser",signupUserFunction)
 router.post("/user" , userNameFunction)
+router.post("/submitVote", verifyToken,submitVoteFunction)
+router.get("/selectedBills",verifyToken,getSelctedBills)
+router.post("/userexist",verifyUser)
+
 
 export default router

@@ -20,7 +20,7 @@ app.use(cors());
 connectDB();
 
 app.use("/users", routerAuth);
-
+app.use("/votes",routerAuth)
 // chack if the DB is connect.
 mongoose.connection.once("open", () => {
   console.log("connect to the DB");
