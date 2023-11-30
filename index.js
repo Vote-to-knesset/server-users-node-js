@@ -6,7 +6,6 @@ import connectDB from "./db/dbconnect.js";
 
 dotenv.config();
 
-// routers
 import routerAuth from "./routes/routerAuth.js";
 
 const port = process.env.PORT || 5050;

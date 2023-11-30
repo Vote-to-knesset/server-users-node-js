@@ -7,9 +7,8 @@ import axios from 'axios';
 
  const getDiscussions = async (req, res) => {
     const { billId } = req.query;
-  console.log(billId);
     try {
-      const bill = await BillComments.findOne({ billId: billId });
+      const bill = await BillComments.findOne({ bill: billId });
       if (!bill) {
         return res.status(404).json({ message: 'Bill not found.' });
       }
@@ -20,47 +19,49 @@ import axios from 'axios';
     }
   };
 
-const setDiscussion = async (req, res) => {
+  const setDiscussion = async (req, res) => {
     const { billId, discussionTitle } = req.body;
+
+  
     try {
-      let bill = await BillComments.findOne({ billId: billId });
-
-
+      let bill = await BillComments.findOne({ bill: billId });
+  
       if (!bill) {
-        bill = await BillComments.create({ billId: billId });
-
-        
+        bill = await BillComments.create({ bill: billId });
       }
-      if (!bill.discussions) {
-        bill.discussions = []; 
-    }
-      let targetDiscussion = bill.discussions.find(
+  
+      const existingDiscussion = bill.discussions.find(
         (item) => item.title === discussionTitle
       );
-      if (!targetDiscussion) {
-        targetDiscussion = {
+  
+      if (!existingDiscussion) {
+        const newDiscussion = {
           title: discussionTitle,
           comments: [],
         };
-
-        bill.discussions.push(targetDiscussion);
+  if (newDiscussion.title !== ""){
+        bill.discussions.push(newDiscussion);
+  
+  
         await bill.save();
-        res.status(200).send({ message: 'Discussion created successfully.' });
+  
+        return res.status(200).send({ message: 'Discussion created successfully.' });}
       } else {
-        res.status(400).send({ message: 'Discussion with this title already exists.' });
+        return res.status(400).send({ message: 'Discussion with this title already exists.' });
       }
     } catch (error) {
+
+      console.error(error);
       res.status(500).send({ message: 'Error creating discussion.', error: error.message });
     }
   };
-  
 
   const setComment = async (req, res) => {
     const { billId, discussionTitle, commentText } = req.body;
   
   
     try {
-      let bill = await BillComments.findOne({ billId: billId });
+      let bill = await BillComments.findOne({ bill: billId });
   
       if (!bill) {
         return res.status(404).send({ message: 'Bill not found.' });
@@ -89,6 +90,8 @@ const setDiscussion = async (req, res) => {
       res.status(500).send({ message: 'Error adding comment.', error: error.message });
     }
   };
-  
-  export { setDiscussion, setComment, getDiscussions };
+  const addLike = async(req,res)=>{
+
+  }
+  export { setDiscussion, setComment, getDiscussions ,addLike};
   

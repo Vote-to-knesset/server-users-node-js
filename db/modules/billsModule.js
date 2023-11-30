@@ -24,10 +24,11 @@ const commentSchema = new mongoose.Schema({
   const discussionSchema = new mongoose.Schema({
     title: String,
     comments: [commentSchema], 
+
   });
   
   const billCommentsSchema = new mongoose.Schema({
-    billId: {
+    bill: {
       type:String,
       unique: true,
     },
