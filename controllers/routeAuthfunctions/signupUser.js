@@ -1,7 +1,7 @@
 import { getOneEmail } from "../../db/controller/functionsDBEmails.js";
 import calculateDateDifference from "../../functions/calculateDateDifference.js";
 import { addOneUser } from "../../db/controller/functionsDBUser.js";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 const signupUserFunction = async (req, res) => {
   const { emailCode, email, userName, password, party, identity, gender } =
     req.body;
