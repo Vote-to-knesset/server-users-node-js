@@ -91,7 +91,38 @@ import axios from 'axios';
     }
   };
   const addLike = async(req,res)=>{
+    const { billId, discussionTitle, commentText } = req.body;
+  
+  
+    try {
+      let bill = await BillComments.findOne({ bill: billId });
+  
+      if (!bill) {
+        return res.status(404).send({ message: 'Bill not found.' });
+      }
+  
+      let targetDiscussion = bill.discussions.find(
+        (item) => item.title === discussionTitle
+      );
+      
+  
+      if (!targetDiscussion) {
+        return res.status(404).send({ message: 'Discussion not found.' });
+      }
+      let targetComment = targetDiscussion.find((item)=> item.commentText === commentText);
+      if (!targetComment) {
+        return res.status(404).send({ message: 'comment not found.' });
+      }
+      targetComment.like += 1
+
+      await bill.save()
+      res.status(200).send({ message: 'like added successfully.' });
+
 
   }
+  catch(error){
+        
+  }
+}
   export { setDiscussion, setComment, getDiscussions ,addLike};
   
