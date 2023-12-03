@@ -4,8 +4,12 @@ import {
 } from "../../db/controller/functionsDBEmails.js";
 
 const verifyEmailFunction = async (req, res) => {
+  try{
   const { email, code } = req.body;
-  const userEmail = getOneEmail({ email: email});
+
+
+  const userEmail = await getOneEmail({ email: email});
+  console.log(userEmail);
 
 
   if (!userEmail) {
@@ -14,7 +18,6 @@ const verifyEmailFunction = async (req, res) => {
     });
   }
 
-  
   if (userEmail.verifyEmail.value !== code){
     return res.status(401).json({
       msg: "one of the informtion is wong",
@@ -31,6 +34,9 @@ const verifyEmailFunction = async (req, res) => {
     return res.status(401).json({
       msg: "erorr",
     });
+  }}
+  catch(error){
+    console.log(error);
   }
 };
 export default verifyEmailFunction;

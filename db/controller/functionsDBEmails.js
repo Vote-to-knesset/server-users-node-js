@@ -26,7 +26,6 @@ export async function allDBEamil() {
 
 export async function getOneEmail(objectEmail) {
   try {
-    console.log(objectEmail);
     return await Emails.findOne(objectEmail);
   } catch (error) {
     return undefined;
