@@ -13,8 +13,9 @@ const signupFunction = async (req, res) => {
       msg: "one is empty",
     });
   }
+  
   const emailUsed = await getOneEmail({ email: email });
-  if (emailUsed && emailUsed.verifyEmail.verify == true) {
+  if (emailUsed && emailUsed.verifyEmail.verify == true ) {
     return res.status(401).json({
       msg: "the email is used",
     });
