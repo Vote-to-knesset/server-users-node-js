@@ -12,10 +12,8 @@ const port = process.env.PORT || 5050;
 
 const app = express();
 app.use(express.json());
-const corsOptions = {
-  origin: "https://votesclient-git-feed-elis-projects-33e640f2.vercel.app",
-};
-app.use(cors(corsOptions));
+
+app.use(cors());
 
 // connect to the DB
 connectDB();
