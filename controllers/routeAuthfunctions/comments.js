@@ -100,16 +100,15 @@ import axios from 'axios';
       if (!bill) {
         return res.status(404).send({ message: 'Bill not found.' });
       }
-  
+      
       let targetDiscussion = bill.discussions.find(
         (item) => item.title === discussionTitle
       );
       
-  
       if (!targetDiscussion) {
         return res.status(404).send({ message: 'Discussion not found.' });
       }
-      let targetComment = targetDiscussion.find((item)=> item.commentText === commentText);
+      let targetComment = targetDiscussion.comments.find((item)=> item.text === commentText);
       if (!targetComment) {
         return res.status(404).send({ message: 'comment not found.' });
       }
@@ -121,7 +120,7 @@ import axios from 'axios';
 
   }
   catch(error){
-        
+        console.log(error);
   }
 }
   export { setDiscussion, setComment, getDiscussions ,addLike};

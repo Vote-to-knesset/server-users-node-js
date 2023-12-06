@@ -22,6 +22,6 @@ router.get("/selectedBills",verifyToken,getSelctedBills)
 router.post("/userexist",verifyUser)
 router.post('/adddiscussion',verifyToken,setDiscussion)
 router.post('/addcomment',verifyToken,setComment)
-router.post('/addlike',verifyToken,addLike)
+router.post('/addlike',addLike)
 router.get('/getcomments',verifyToken,getDiscussions)
 export default router
