@@ -39,6 +39,7 @@ const googleLogin = async (req, res) => {
       if (userSave == true) {
         return res.status(200).json({
           userName:name,
+          email:email,
         });
       } else {
         return res.status(401).json({
