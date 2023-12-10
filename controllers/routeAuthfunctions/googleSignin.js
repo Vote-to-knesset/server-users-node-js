@@ -38,7 +38,7 @@ const googleLogin = async (req, res) => {
       });
       if (userSave == true) {
         return res.status(200).json({
-          msg: "the email is save",
+          userName:name,
         });
       } else {
         return res.status(401).json({
