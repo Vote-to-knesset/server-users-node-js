@@ -1,6 +1,6 @@
 import { getOneEmail,addOneEmail } from "../../db/controller/functionsDBEmails.js";
 import calculateDateDifference from "../../functions/calculateDateDifference.js";
-import { addOneUser } from "../../db/controller/functionsDBUser.js";
+import { addOneUser,getOneUser } from "../../db/controller/functionsDBUser.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -73,7 +73,8 @@ const signupWithGoogle = async (req, res) => {
   }
   const addUser = await addOneUser({
     userName: userName,
-    password: "",
+    password: process.env.SECRET_KEY_TOKEN,
+
     date: new Date(),
     party: party,
     identity: identity,
