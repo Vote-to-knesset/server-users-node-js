@@ -9,6 +9,8 @@ import userNameFunction from '../controllers/routeAuthfunctions/userUsed.js'
 import { verifyToken, submitVoteFunction ,verifyUser } from '../controllers/routeAuthfunctions/submitVote.js'
 import getSelctedBills from '../controllers/routeAuthfunctions/getBillsInfo.js'
 import {setDiscussion, setComment, getDiscussions, addLike} from '../controllers/routeAuthfunctions/comments.js'
+
+import { googleLogin,signupWithGoogle } from '../controllers/routeAuthfunctions/googleSignin.js'
 const router = express.Router()
 
 
@@ -24,4 +26,6 @@ router.post('/adddiscussion',verifyToken,setDiscussion)
 router.post('/addcomment',verifyToken,setComment)
 router.post('/addlike',verifyToken,addLike)
 router.get('/getcomments',verifyToken,getDiscussions)
+router.post('/googleLogin',googleLogin)
+router.post('/signupWithGoogle',signupWithGoogle)
 export default router
