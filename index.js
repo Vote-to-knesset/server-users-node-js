@@ -18,6 +18,9 @@ app.use(cors());
 // connect to the DB
 connectDB();
 
+
+
+
 app.use("/users", routerAuth);
 app.use("/votes",routerAuth)
 

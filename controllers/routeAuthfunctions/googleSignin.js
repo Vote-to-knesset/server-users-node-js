@@ -1,13 +1,16 @@
-import { getOneEmail,addOneEmail } from "../../db/controller/functionsDBEmails.js";
+import {
+  getOneEmail,
+  addOneEmail,
+} from "../../db/controller/functionsDBEmails.js";
 import calculateDateDifference from "../../functions/calculateDateDifference.js";
-import { addOneUser,getOneUser } from "../../db/controller/functionsDBUser.js";
+import { addOneUser, getOneUser } from "../../db/controller/functionsDBUser.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const googleLogin = async (req, res) => {
   try {
     const googleToken = req.headers.authorization;
-    console.log(googleToken,"efr");
+    console.log(googleToken, "efr");
     if (!googleToken)
       return res
         .status(403)
@@ -21,7 +24,7 @@ const googleLogin = async (req, res) => {
     if (emailUser) {
       const token = jwt.sign(
         {
-          userName:name,
+          userName: name,
         },
         process.env.SECRET_KEY_TOKEN,
         {
@@ -38,8 +41,8 @@ const googleLogin = async (req, res) => {
       });
       if (userSave == true) {
         return res.status(200).json({
-          userName:name,
-          email:email,
+          userName: name,
+          email: email,
         });
       } else {
         return res.status(401).json({
@@ -52,56 +55,55 @@ const googleLogin = async (req, res) => {
   }
 };
 const signupWithGoogle = async (req, res) => {
+  try {
+    const { email, userName, party, identity, gender } = req.body;
+    console.log(req.body);
 
-    try{
-  const { email, userName, party, identity, gender } = req.body;
-  console.log(req.body);
-
-  const emailUser = await getOneEmail({
-    email: email,
-  });
-
-  if (!emailUser) {
-    return res.status(401).json({
-      msg: "one of the informtion is wrong",
+    const emailUser = await getOneEmail({
+      email: email,
     });
-  }
-  let user = await getOneUser({ userName: userName });
 
-  if (user){
-    userName += "o"
-  }
-  const addUser = await addOneUser({
-    userName: userName,
-    password: process.env.SECRET_KEY_TOKEN,
-
-    date: new Date(),
-    party: party,
-    identity: identity,
-    gender: gender,
-  });
-  const token = jwt.sign(
-    {
-      userName,
-    },
-    process.env.SECRET_KEY_TOKEN,
-    {
-      expiresIn: 3600000,
+    if (!emailUser) {
+      return res.status(401).json({
+        msg: "one of the informtion is wrong",
+      });
     }
-  );
-  if (addUser == true) {
-    return res.status(200).json({token
-        ,
-      msg: "the user is added",
+    let user = await getOneUser({ userName: userName });
+
+    if (user) {
+      userName += "o";
+    }
+    let password =  process.env.SECRET_KEY_TOKEN
+    let hashePassword =  bcrypt.hash(password, 10);
+
+    const addUser = await addOneUser({
+      userName: userName,
+      password: hashePassword,
+
+      date: new Date(),
+      party: party,
+      identity: identity,
+      gender: gender,
     });
-  } else {
-    return res.status(401).json({
-      msg: "erorr",
-    });
-  }}
-  catch(error){
+    const token = jwt.sign(
+      {
+        userName,
+      },
+      process.env.SECRET_KEY_TOKEN,
+      {
+        expiresIn: 3600000,
+      }
+    );
+    if (addUser == true) {
+      return res.status(200).json({ token, msg: "the user is added" });
+    } else {
+      return res.status(401).json({
+        msg: "erorr",
+      });
+    }
+  } catch (error) {
     console.log(error);
   }
 };
 
-export {signupWithGoogle,googleLogin}
+export { signupWithGoogle, googleLogin };
