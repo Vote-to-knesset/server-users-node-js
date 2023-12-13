@@ -10,7 +10,6 @@ import jwt from "jsonwebtoken";
 const googleLogin = async (req, res) => {
   try {
     const googleToken = req.headers.authorization;
-    console.log(googleToken, "efr");
     if (!googleToken)
       return res
         .status(403)
@@ -69,12 +68,15 @@ const signupWithGoogle = async (req, res) => {
       });
     }
     let user = await getOneUser({ userName: userName });
+    console.log(user);
 
     if (user) {
       userName += "o";
     }
     let password =  process.env.SECRET_KEY_TOKEN
-    let hashePassword =  bcrypt.hash(password, 10);
+    let hashePassword = await bcrypt.hash(password, 10);
+
+    console.log(hashePassword);
 
     const addUser = await addOneUser({
       userName: userName,
@@ -85,6 +87,7 @@ const signupWithGoogle = async (req, res) => {
       identity: identity,
       gender: gender,
     });
+    console.log(addUser);
     const token = jwt.sign(
       {
         userName,
@@ -94,6 +97,7 @@ const signupWithGoogle = async (req, res) => {
         expiresIn: 3600000,
       }
     );
+    console.log(token);
     if (addUser == true) {
       return res.status(200).json({ token, msg: "the user is added" });
     } else {
