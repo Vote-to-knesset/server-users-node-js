@@ -11,6 +11,7 @@ import getSelctedBills from '../controllers/routeAuthfunctions/getBillsInfo.js'
 import {setDiscussion, setComment, getDiscussions, addLike} from '../controllers/routeAuthfunctions/comments.js'
 import { getHotBills } from '../controllers/routeAuthfunctions/hotBills.js'
 import { googleLogin,signupWithGoogle } from '../controllers/routeAuthfunctions/googleSignin.js'
+import {getNotifications} from '../controllers/routeAuthfunctions/notifications.js'
 const router = express.Router()
 
 
@@ -29,4 +30,5 @@ router.get('/getcomments',verifyToken,getDiscussions)
 router.post('/googleLogin',googleLogin)
 router.post('/signupWithGoogle',signupWithGoogle)
 router.get('/hotbills',getHotBills)
+router.get('/notifications',verifyToken,getNotifications)
 export default router
