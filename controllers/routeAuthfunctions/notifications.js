@@ -1,4 +1,5 @@
 import { getOneUser } from "../../db/controller/functionsDBUser.js";
+import Bills from "../../db/modules/billsModule.js";
 import axios from "axios";
 
 export const getNotifications = async (req, res) => {
@@ -17,10 +18,30 @@ export const getNotifications = async (req, res) => {
 
     let laws = response.data
     let userVotes = user.billsVote
-
+    let userVote = await Bills.find({ billId: { $in: userVotes } });
 
     let notes = laws.filter((bill) => userVotes.includes(bill.FK_ItemID));
-    console.log(notes.length);
+    console.log(notes);
+
+    
+
+    userVote.forEach((vote) => {
+        let note = notes.find((n) => n.FK_ItemID == vote.billId);
+        
+        if (note) {
+            
+          if (vote.votesInFavor.includes(userName)){
+            note.userVote = "בעד"
+
+          }
+          else{
+            note.userVote = "נגד"
+
+          }
+        }
+      });
+
+
 
     res.status(200).send({ data: notes });
     
