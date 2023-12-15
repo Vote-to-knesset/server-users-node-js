@@ -20,13 +20,13 @@ export const getNotifications = async (req, res) => {
     let userVotes = user.billsVote
     let userVote = await Bills.find({ billId: { $in: userVotes } });
 
-    let notes = laws.filter((bill) => userVotes.includes(bill.FK_ItemID));
+    let notes = laws.filter((bill) => userVotes.includes(bill.FK_ItemID)&& bill.Decision.includes("שליש"));
     console.log(notes);
 
     
 
     userVote.forEach((vote) => {
-        let note = notes.find((n) => n.FK_ItemID == vote.billId);
+        let note = notes.find((n) => n.FK_ItemID == vote.billId );
         
         if (note) {
             
