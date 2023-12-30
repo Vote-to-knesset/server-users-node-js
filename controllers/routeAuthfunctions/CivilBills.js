@@ -13,10 +13,11 @@ import mongoose from "mongoose";
       return res.status(404).send({ message: "User not found." });
     }
 
-    const billId = mongoose.Types.ObjectId().toString();
+    const billId = mongoose.Types.ObjectId();
 
     const newCivilBill = new CivilBills({
-      billId: billId,
+      billId: billId.toString(),
+
       name: name,
       summery: summery,
       parson: userName,
