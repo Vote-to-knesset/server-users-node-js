@@ -32,6 +32,6 @@ router.post('/googleLogin',googleLogin)
 router.post('/signupWithGoogle',signupWithGoogle)
 router.get('/hotbills',getHotBills)
 router.get('/notifications',verifyToken,getNotifications)
-router.post('setcivilbills',verifyToken,setCivilBill)
-router.get('getcivilbills',verifyToken,getAllCivilBills)
+router.post('/setcivilbills',verifyToken,setCivilBill)
+router.get('/getcivilbills',verifyToken,getAllCivilBills)
 export default router
