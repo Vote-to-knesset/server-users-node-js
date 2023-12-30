@@ -3,7 +3,7 @@ import CivilBills from "../../db/modules/civilBillsModule.js";
 import axios from "axios";
 import mongoose from "mongoose";
 
-export const setCivilBill = async (req, res) => {
+ const setCivilBill = async (req, res) => {
   try {
     const { userName, name, summery , date} = req.body;
 
@@ -33,9 +33,8 @@ export const setCivilBill = async (req, res) => {
     res.status(500).send({ message: "Error creating civil bill." });
   }
 };
-export const getAllCivilBills = async (req, res) => {
+ const getAllCivilBills = async (req, res) => {
     try {
-      // Retrieve all civil bills from the database
       const allCivilBills = await CivilBills.find({});
   
       res.status(200).send({ data: allCivilBills });
