@@ -22,7 +22,7 @@ import { v4 as uuidv4 } from 'uuid';
       name: name,
       summery: summery,
       parson: userName,
-      date: new Date(date), 
+      date: date, 
       votesInFavor: [],
       votesAgainst: [],
     });
