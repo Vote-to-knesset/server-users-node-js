@@ -2,6 +2,7 @@ import { getOneUser } from "../../db/controller/functionsDBUser.js";
 import CivilBills from "../../db/modules/civilBillsModule.js";
 import axios from "axios";
 import mongoose from "mongoose";
+import { v4 as uuidv4 } from 'uuid';
 
  const setCivilBill = async (req, res) => {
   try {
@@ -13,10 +14,10 @@ import mongoose from "mongoose";
       return res.status(404).send({ message: "User not found." });
     }
 
-    const billId = mongoose.Types.ObjectId();
+    const billId = uuidv4(); 
 
     const newCivilBill = new CivilBills({
-      billId: billId.toString(),
+      billId: billId,
 
       name: name,
       summery: summery,

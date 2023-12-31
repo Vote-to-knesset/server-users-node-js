@@ -4,6 +4,7 @@ const civilBillsSchema = new mongoose.Schema({
   billId: {
     type: String,
     unique: true,
+    require:true,
   },
   name: {
     type: String,
