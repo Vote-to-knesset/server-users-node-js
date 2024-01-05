@@ -46,4 +46,34 @@ import { v4 as uuidv4 } from 'uuid';
     }
   };
 
-export {getAllCivilBills, setCivilBill};
+  const setCivilBillVote = async (req, res) => {
+    try {
+      const { userName, billId , vote} = req.body;
+  
+      let user = await getOneUser({ userName: userName });
+  
+      if (!user) {
+        return res.status(404).send({ message: "User not found." });
+      }
+
+      const civilBill = CivilBills.findOne({billId:billId})
+
+      if (vote == "votesAgainst"){
+        civilBill.votesAgainst.push(userName)
+      }
+      else{
+        civilBill.votesInFavor.push(userName)
+      }
+      
+      await civilBill.save()
+
+     
+  
+      res.status(200).send({ data: "submit vote" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: "Error vote civil bill." });
+    }
+  };
+
+export {getAllCivilBills, setCivilBill,setCivilBillVote};
