@@ -58,8 +58,8 @@ import { v4 as uuidv4 } from 'uuid';
         return res.status(404).send({ message: "User not found." });
       }
 
-      const civilBill = CivilBills.find({billId:billId})
-      let hasheUser = await bcrypt.hash(userName, 10);
+      const civilBill = await CivilBills.findOne({billId:billId})
+      const hasheUser = await bcrypt.hash(userName, 10);
 
       if (!civilBill) {
         return res.status(404).send({ message: "Civil bill not found." });
