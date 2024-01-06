@@ -1,5 +1,7 @@
 import { getOneUser } from "../../db/controller/functionsDBUser.js";
 import CivilBills from "../../db/modules/civilBillsModule.js";
+import bcrypt from 'bcryptjs'
+
 import axios from "axios";
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from 'uuid';
@@ -57,12 +59,13 @@ import { v4 as uuidv4 } from 'uuid';
       }
 
       const civilBill = CivilBills.findOne({billId:billId})
+      let hasheUser = await bcrypt.hash(userName, 10);
 
-      if (vote == "votesAgainst"){
-        civilBill.votesAgainst.push(userName)
+      if (vote == "against"){
+        civilBill.votesAgainst.push(hasheUser)
       }
       else{
-        civilBill.votesInFavor.push(userName)
+        civilBill.votesInFavor.push(hasheUser)
       }
       
       await civilBill.save()
