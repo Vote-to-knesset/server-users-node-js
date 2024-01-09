@@ -1,7 +1,7 @@
 import { getOneUser } from "../../db/controller/functionsDBUser.js";
 import CivilBills from "../../db/modules/civilBillsModule.js";
 import bcrypt from 'bcryptjs'
-
+import User from "../../db/modules/usermodule.js";
 import axios from "axios";
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from 'uuid';
@@ -38,10 +38,15 @@ import { v4 as uuidv4 } from 'uuid';
   }
 };
  const getAllCivilBills = async (req, res) => {
+
+  const {userName} = req.body
     try {
       const allCivilBills = await CivilBills.find({});
+
+      const userVote = User.find({userName:userName})
+
   
-      res.status(200).send({ data: allCivilBills });
+      res.status(200).send({ data: allCivilBills,voted:userVote.billsVote });
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Error fetching all civil bills." });
@@ -60,6 +65,13 @@ import { v4 as uuidv4 } from 'uuid';
 
       const civilBill = await CivilBills.findOne({billId:billId})
       const hasheUser = await bcrypt.hash(userName, 10);
+      
+      
+      await user.billsVote.push(billId)
+
+      user.save()
+
+
 
       if (!civilBill) {
         return res.status(404).send({ message: "Civil bill not found." });
