@@ -35,5 +35,5 @@ router.get('/notifications',verifyToken,getNotifications)
 router.post('/setcivilbills',verifyToken,setCivilBill)
 router.get('/getcivilbills',verifyToken,getAllCivilBills)
 router.post('/setcivilbillvote',verifyToken,setCivilBillVote)
-router.post('sethoverbills',verifyToken,setHoverBills)
+router.post('/sethoverbills',verifyToken,setHoverBills)
 export default router
