@@ -9,7 +9,7 @@ const setHoverBills = async (req, res) => {
       return res.status(404).send({ message: "User not found." });
     }
 
-    user.billsHover.push(hoveredBill);
+    user.billsHover.push(...hoveredBill);
 
     await user.save();
 
