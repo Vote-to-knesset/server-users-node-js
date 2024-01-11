@@ -7,7 +7,7 @@ import loginFunction from '../controllers/routeAuthfunctions/logIn.js'
 import signupUserFunction from '../controllers/routeAuthfunctions/signupUser.js'
 import userNameFunction from '../controllers/routeAuthfunctions/userUsed.js'
 import { verifyToken, submitVoteFunction ,verifyUser } from '../controllers/routeAuthfunctions/submitVote.js'
-import getSelctedBills from '../controllers/routeAuthfunctions/getBillsInfo.js'
+import {getSelctedBills,setHoverBills} from '../controllers/routeAuthfunctions/getBillsInfo.js'
 import {setDiscussion, setComment, getDiscussions, addLike} from '../controllers/routeAuthfunctions/comments.js'
 import { getHotBills } from '../controllers/routeAuthfunctions/hotBills.js'
 import { googleLogin,signupWithGoogle } from '../controllers/routeAuthfunctions/googleSignin.js'
@@ -35,4 +35,5 @@ router.get('/notifications',verifyToken,getNotifications)
 router.post('/setcivilbills',verifyToken,setCivilBill)
 router.get('/getcivilbills',verifyToken,getAllCivilBills)
 router.post('/setcivilbillvote',verifyToken,setCivilBillVote)
+router.post('sethoverbills',verifyToken,setHoverBills)
 export default router

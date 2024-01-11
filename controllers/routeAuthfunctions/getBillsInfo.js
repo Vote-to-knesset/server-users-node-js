@@ -32,7 +32,7 @@ const getSelctedBills = async (req, res) => {
     }
 
     let selectedBills = user.billsVote;
-    const hoverbills = user.billsHover
+    const hoverbills = user.billsHover || []
     const selectedHoverBills = [selectedBills,hoverbills]
 
     res.status(200).send({ data: selectedHoverBills });
