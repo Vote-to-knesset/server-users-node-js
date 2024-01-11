@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
     type: Array,
     default: [],
   },
+  billsHover:{
+    type:Array,
+    default:[],
+  },
 });
 
 const User = mongoose.model("User", userSchema);
