@@ -4,7 +4,22 @@ import axios from 'axios';
 
 
 
-export const getHotBills = async (req, res) => {
+const getRandomBillIds = async (req, res) => {
+  try {
+    const randomBills = await Bills.aggregate([
+      { $sample: { size: 3 } },
+      { $project: { billId: 1 } },
+    ]);
+
+    const billIds = randomBills.map((bill) => bill.billId);
+    res.json({ bills: billIds });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+ const getHotBills = async (req, res) => {
   try {
     const hotBills = await Bills.aggregate([
       {
@@ -42,3 +57,6 @@ export const getHotBills = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+
+export {getHotBills,getRandomBillIds}
