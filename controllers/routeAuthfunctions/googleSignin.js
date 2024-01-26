@@ -6,6 +6,8 @@ import calculateDateDifference from "../../functions/calculateDateDifference.js"
 import { addOneUser, getOneUser } from "../../db/controller/functionsDBUser.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { OAuth2Client } from "google-auth-library";
+
 
 const googleLogin = async (req, res) => {
   try {
@@ -14,9 +16,21 @@ const googleLogin = async (req, res) => {
       return res
         .status(403)
         .send({ auth: false, message: "No token provided." });
-    const decodedToken = jwt.decode(googleToken);
 
-    const { email, name } = decodedToken;
+
+        const CLIENT_ID = "208654069925-gbk9o70num7emv3ugghitfhlbk675h9l.apps.googleusercontent.com";
+
+        const client = new OAuth2Client(CLIENT_ID);
+    
+        const ticket = await client.verifyIdToken({
+          idToken: googleToken,
+          audience: CLIENT_ID,
+        });
+    
+        const { email, name } = ticket.getPayload();
+    // const decodedToken = jwt.decode(googleToken);
+
+    // const { email, name } = decodedToken;
     const emailUser = await getOneEmail({
       email: email,
     });
